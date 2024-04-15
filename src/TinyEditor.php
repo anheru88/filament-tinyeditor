@@ -19,6 +19,7 @@ class TinyEditor extends Field implements Contracts\CanBeLengthConstrained, Cont
 
     protected string $view = 'filament-tinyeditor::tiny-editor';
     protected string $profile = 'default';
+    protected array $customConfigs = [];
     protected bool $isSimple = false;
     protected string $direction;
     protected int $maxHeight = 0;
@@ -300,13 +301,23 @@ class TinyEditor extends Field implements Contracts\CanBeLengthConstrained, Cont
         return $this;
     }
 
+    /**
+     * @param  array  $customConfigs
+     * @return $this
+     */
+    public function setCustomConfigs(array $customConfigs): static
+    {
+        $this->customConfigs = $customConfigs;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
     public function getCustomConfigs(): string
     {
-        if (config('filament-tinyeditor.profiles.' . $this->profile . '.custom_configs')) {
-            return str_replace('"', "'", json_encode(config('filament-tinyeditor.profiles.' . $this->profile . '.custom_configs')));
-        }
-
-        return '';
+        return str_replace('"', "'", json_encode($this->customConfigs));
     }
 
     public function darkMode(): string | bool

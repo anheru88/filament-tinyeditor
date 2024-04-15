@@ -65,7 +65,7 @@
 			image_description: @js($imageDescription()),
 			image_class_list: {!! $getImageClassList() !!},
 			license_key: '{{ $getLicenseKey() }}',
-			custom_configs: '{{ $getCustomConfigs() }}',
+			custom_configs: {{ $getCustomConfigs() }},
 		})"
     >
         @unless($isDisabled())
